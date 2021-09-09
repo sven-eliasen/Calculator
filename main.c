@@ -5,22 +5,22 @@
 
 float addition (const float op1, const float op2)
 {
-  return op1 + op2;
+	return op1 + op2;
 }
 
 float soustraction (const float op1, const float op2)
 {
-  return op1 - op2;
+	return op1 - op2;
 }
 
 float multiplication (const float op1, const float op2)
 {
-  return op1 * op2;
+	return op1 * op2;
 }
 
 float division (const float op1, const float op2)
 {
-  return op1 / op2;
+	return op1 / op2;
 }
 
 void division2 (const float op1, const float op2)
@@ -42,7 +42,7 @@ void division2 (const float op1, const float op2)
 
 float power (const float op1, const float op2)
 {
-  return pow(op1, op2);
+	return pow(op1, op2);
 }
 
 void calcul (float op1, float op2, char op)
@@ -83,6 +83,12 @@ int main (int argc, char **argv)
 	if (argc < 4)
 	{
 		printf("Not enough args !\n");
+		exit(1);
+	}
+	
+	if (argc%2 != 1)
+	{
+		printf("Wrong args number!\n");
 		exit(1);
 	}
 
