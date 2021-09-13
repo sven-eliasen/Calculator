@@ -30,9 +30,9 @@ int verifArg(int argc, char **argv)
 		//if is - 2 + 2
                 for (i = 1; i < argc; i += 2)
 		{
-			if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0|| strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) == 0)
+		if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0|| strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
 			{
-				printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
+				printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
 				exit(1);
 			}
             	}
@@ -45,7 +45,7 @@ int verifArg(int argc, char **argv)
                 {
                         if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0 || strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
                         {
-                                printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
+                                printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
                                 exit(1);
                        	}
 		}
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 		}
 		else
 		{
-			list[nb_c].operator = argv[i - 1];
+			list[nb_c].operator = argv[i - 1][0];
                         list[nb_c].number = atof(argv[i]);
 			nb_c ++;
 		}
@@ -88,13 +88,13 @@ int main(int argc, char **argv) {
 	    else if (j == 2)
 	    {
 		// if is - 2 + 2
-		list[nb_c].operator = argv[i];
+		list[nb_c].operator = argv[i][0];
                 list[nb_c].number = atof(argv[i + 1]);
                 nb_c ++;
 	    }
 	    else
 	    {
-		printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
+		printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
 	    }
     }
 
