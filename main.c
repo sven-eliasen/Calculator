@@ -22,7 +22,7 @@ void reorder_list(NUMBER list[], float res, int *i, int *nb_c) {
     (*nb_c)--;
 }
 
-int verifArg(int argc, char **argv)
+void verifArg(int argc, char **argv)
 {
     for (int i = 2; i < argc; i += 2)
     {
@@ -32,46 +32,31 @@ int verifArg(int argc, char **argv)
             exit(1);
         }
     }
-    return 1;
 }
 
 int main(int argc, char **argv) {
 
     int nb_c = argc / 2;
-    int j = verifArg(argc, argv);
-    int i;
+    verifArg(argc, argv);
 
     NUMBER list[nb_c];
     nb_c = 0;
+
     //Sort arguments in list
-    for (i = 1; i < argc; i += 2)
+    for (int i = 1; i < argc; i += 2)
     {
-	    if (j == 1)
-	    {
-	    	// if is 2 + 2
 		if (i == 1)
 		{
 			list[nb_c].operator = '+';
-                	list[nb_c].number = atof(argv[i]);
+            list[nb_c].number = atof(argv[i]);
 			nb_c ++;
 		}
 		else
 		{
 			list[nb_c].operator = argv[i - 1][0];
-                        list[nb_c].number = atof(argv[i]);
+            list[nb_c].number = atof(argv[i]);
 			nb_c ++;
 		}
-	    }
-	    else if (j == 2) {
-		// if is - 2 + 2
-		list[nb_c].operator = argv[i][0];
-                list[nb_c].number = atof(argv[i + 1]);
-                nb_c ++;
-	    }
-	    else
-	    {
-		printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
-	    }
     }
 
     // Loop to calculate all multiplication and division
