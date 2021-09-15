@@ -22,10 +22,28 @@ void reorder_list(NUMBER list[], float res, int *i, int *nb_c) {
     (*nb_c)--;
 }
 
+void division2 (const float op1, const float op2)
+{
+    int opp1 = (int)op1;
+    int opp2 = (int)op2;
+    int c = 0;
+
+    if (opp2 > opp1) printf("Quotien : 0, Reste : %d\n",  opp2);
+
+    while (opp1 >= opp2)
+    {
+        opp1 = opp1 - opp2;
+        c++;
+    }
+
+    printf("Quotien : %d, Reste : %d\n", c, opp1);
+}
+
 void verifArg(int argc, char **argv)
 {
     for (int i = 2; i < argc; i += 2)
     {
+        // TODO: argc%2 == 0
         if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0 || strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
         {
             printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
@@ -92,8 +110,13 @@ int main(int argc, char **argv) {
         }
     }
 
-    // First number of list is the result at the end
-    printf("Result : %f\n", list[0].number);
+    // If there is a modulo do it, if not print normal result
+    if (list[1].operator == '%') {
+        division2(list[0].number, list[1].number);
+    } else {
+        // First number of list is the result at the end
+        printf("Result : %f\n", list[0].number);
+    }
 
     return 0;
 }
