@@ -24,26 +24,15 @@ void reorder_list(NUMBER list[], float res, int *i, int *nb_c) {
 
 int verifArg(int argc, char **argv)
 {
-	int i;
-
-    if (strcmp(argv[2],"+") == 0 || strcmp(argv[2],"-") == 0 || strcmp(argv[2],"x") == 0 ||strcmp(argv[2],"m") == 0 || strcmp(argv[2],"*") == 0 || strcmp(argv[2],"/") == 0 || strcmp(argv[2],"%") == 0 || strcmp(argv[2],"v") == 0 || strcmp(argv[2],"V") == 0 || strcmp(argv[2],"^") == 0)
+    for (int i = 2; i < argc; i += 2)
+    {
+        if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0 || strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
         {
-	    	//if is 2 + 2
-		for (i = 2; i < argc; i += 2)
-                {
-                        if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0 || strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
-                        {
-                                printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
-                                exit(1);
-                       	}
-		}
-		return 1;
+            printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+            exit(1);
         }
-        else
-        {
-                printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
-                exit(1);
-            }
+    }
+    return 1;
 }
 
 int main(int argc, char **argv) {
