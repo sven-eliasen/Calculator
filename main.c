@@ -39,26 +39,26 @@ void division2 (const float op1, const float op2)
     printf("Quotien : %d, Reste : %d\n", c, opp1);
 }
 
-void verifArg(int argc, char **argv)
+int verifArg(int argc, char **argv)
 {
     for (int i = 2; i < argc; i += 2)
     {
-        // TODO: argc%2 == 0
+        if (argc % 2 != 0)
+        {
+            argc ++;
+        }
         if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0 || strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
         {
             printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
             exit(1);
         }
     }
+    return argc/2;
 }
 
-int main(int argc, char **argv) {
-
-    int nb_c = argc / 2;
-    verifArg(argc, argv);
-
-    NUMBER list[nb_c];
-    nb_c = 0;
+int sortArg (int argc, char **argv, NUMBER list[]) 
+{
+    int nb_c = 0;
 
     //Sort arguments in list
     for (int i = 1; i < argc; i += 2)
@@ -76,16 +76,39 @@ int main(int argc, char **argv) {
 			nb_c ++;
 		}
     }
+    return nb_c;
+}
 
+float addition (const float op1, const float op2)
+{
+	return op1 + op2;
+}
+
+float soustraction (const float op1, const float op2)
+{
+	return op1 - op2;
+}
+
+float multiplication (const float op1, const float op2)
+{
+	return op1 * op2;
+}
+
+float division (const float op1, const float op2)
+{
+	return op1 / op2;
+}
+
+void calcul(int nb_c, NUMBER list[]) {
     // Loop to calculate all multiplication and division
     for(int i = 1; i < nb_c; i++) {
 
         float res = -1;
         if (list[i].operator == 'x') {
-            res = list[i].number * list[i-1].number;
+            res = multiplication(list[i].number, list[i-1].number);
         }
         if (list[i].operator == '/') {
-            res = list[i-1].number / list[i].number;
+            res = division(list[i-1].number, list[i].number);
         }
 
         // If there is a multiplication or division, then reorder the list with result
@@ -99,10 +122,10 @@ int main(int argc, char **argv) {
 
         float res = -1;
         if (list[i].operator == '+') {
-            res = list[i].number + list[i-1].number;
+            res = addition(list[i].number, list[i-1].number);
         }
         if (list[i].operator == '-') {
-            res = list[i-1].number - list[i].number;
+            res = soustraction(list[i-1].number, list[i].number);
         }
 
         if (res != -1) {
@@ -117,6 +140,14 @@ int main(int argc, char **argv) {
         // First number of list is the result at the end
         printf("Result : %f\n", list[0].number);
     }
+}
 
+int main(int argc, char **argv) 
+{
+    int lengthTab = verifArg(argc, argv);
+    NUMBER list[lengthTab];
+    int nb_c = sortArg(argc, argv, list);
+    calcul(nb_c, list);
+    
     return 0;
 }
