@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <math.h>
 
 typedef struct Number {
     char operator;
@@ -103,6 +104,11 @@ float division (const float op1, const float op2)
 	return op1 / op2;
 }
 
+float power(const float op1, const float op2)
+{
+    return pow(op1, op2);
+}
+
 void calcul(int nb_c, NUMBER list[]) {
     // Loop to calculate all multiplication and division
     for(int i = 1; i < nb_c; i++) {
@@ -116,6 +122,8 @@ void calcul(int nb_c, NUMBER list[]) {
             case '/':
                 res = division(list[i-1].number, list[i].number);
                 break;
+            case '^':
+                res = power(list[i-1].number, list[i].number);
         }
 
         // If there is a multiplication or division, then reorder the list with result
