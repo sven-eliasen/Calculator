@@ -28,7 +28,11 @@ void division2 (const float op1, const float op2)
     int opp2 = (int)op2;
     int c = 0;
 
-    if (opp2 > opp1) printf("Quotien : 0, Reste : %d\n",  opp2);
+    if (opp2 > opp1) 
+    {
+        printf("Quotien : 0, Reste : %d\n",  opp2);
+        exit(0);
+    }
 
     while (opp1 >= opp2)
     {
@@ -104,11 +108,14 @@ void calcul(int nb_c, NUMBER list[]) {
     for(int i = 1; i < nb_c; i++) {
 
         float res = -1;
-        if (list[i].operator == 'x') {
-            res = multiplication(list[i].number, list[i-1].number);
-        }
-        if (list[i].operator == '/') {
-            res = division(list[i-1].number, list[i].number);
+        char op = list[i].operator;
+        switch(op) {
+            case 'x':
+                res = multiplication(list[i].number, list[i-1].number);
+                break;
+            case '/':
+                res = division(list[i-1].number, list[i].number);
+                break;
         }
 
         // If there is a multiplication or division, then reorder the list with result
@@ -121,11 +128,14 @@ void calcul(int nb_c, NUMBER list[]) {
     for(int i = 1; i < nb_c; i++) {
 
         float res = -1;
-        if (list[i].operator == '+') {
-            res = addition(list[i].number, list[i-1].number);
-        }
-        if (list[i].operator == '-') {
-            res = soustraction(list[i-1].number, list[i].number);
+        char op = list[i].operator;
+        switch(op) {
+            case '+':
+                res = addition(list[i].number, list[i-1].number);
+                break;
+            case '-':
+                res = soustraction(list[i-1].number, list[i].number);
+                break;
         }
 
         if (res != -1) {
@@ -148,6 +158,5 @@ int main(int argc, char **argv)
     NUMBER list[lengthTab];
     int nb_c = sortArg(argc, argv, list);
     calcul(nb_c, list);
-    
     return 0;
 }
