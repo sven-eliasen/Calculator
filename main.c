@@ -61,7 +61,7 @@ int verifArg(int argc, char **argv)
     return argc/2;
 }
 
-int sortArg (int argc, char **argv, NUMBER list[]) 
+int parseArgs (int argc, char **argv, NUMBER list[])
 {
     int nb_c = 0;
 
@@ -109,7 +109,7 @@ float power(const float op1, const float op2)
     return pow(op1, op2);
 }
 
-void calcul(int nb_c, NUMBER list[]) {
+void calculate(int nb_c, NUMBER list[]) {
     // Loop to calculate all multiplication and division
     for(int i = 1; i < nb_c; i++) {
 
@@ -164,7 +164,7 @@ int main(int argc, char **argv)
 {
     int lengthTab = verifArg(argc, argv);
     NUMBER list[lengthTab];
-    int nb_c = sortArg(argc, argv, list);
-    calcul(nb_c, list);
+    int nb_c = parseArgs(argc, argv, list);
+    calculate(nb_c, list);
     return 0;
 }
