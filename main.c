@@ -46,12 +46,16 @@ void division2 (const float op1, const float op2)
 
 int verifArg(int argc, char **argv)
 {
+    // TODO: gestion avec switch + modulo que à la fin
     for (int i = 2; i < argc; i += 2)
     {
         if (argc % 2 != 0)
         {
-            argc ++;
+            printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+            exit(1);
         }
+
+        // Do switch here
         if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0 || strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
         {
             printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
@@ -106,28 +110,42 @@ float division (const float op1, const float op2)
 
 float power(const float op1, const float op2)
 {
-    return pow(op1, op2);
+    return pow(op2, op1);
 }
 
 void calculate(int nb_c, NUMBER list[]) {
+
+    // Loop to calculate all power
+    for (int i = 1; i < nb_c; ++i) {
+        float res = -1;
+        char bool = 0;
+
+        if (list[i].operator == '^') {
+            res = power(list[i].number, list[i-1].number);
+            bool = 1;
+        }
+
+        if (bool) {
+            reorder_list(list, res, &i, &nb_c);
+        }
+    }
+
     // Loop to calculate all multiplication and division
     for(int i = 1; i < nb_c; i++) {
-
         float res = -1;
-        char op = list[i].operator;
-        switch(op) {
-            case 'x':
-                res = multiplication(list[i].number, list[i-1].number);
-                break;
-            case '/':
-                res = division(list[i-1].number, list[i].number);
-                break;
-            case '^':
-                res = power(list[i-1].number, list[i].number);
+        char bool = 0;
+
+        if (list[i].operator == 'x') {
+            res = multiplication(list[i].number, list[i-1].number);
+            bool = 1;
+        }
+        if (list[i].operator == '/') {
+            res = division(list[i].number, list[i-1].number);
+            bool = 1;
         }
 
         // If there is a multiplication or division, then reorder the list with result
-        if (res != -1) {
+        if (bool) {
             reorder_list(list, res, &i, &nb_c);
         }
     }
@@ -136,17 +154,18 @@ void calculate(int nb_c, NUMBER list[]) {
     for(int i = 1; i < nb_c; i++) {
 
         float res = -1;
-        char op = list[i].operator;
-        switch(op) {
-            case '+':
-                res = addition(list[i].number, list[i-1].number);
-                break;
-            case '-':
-                res = soustraction(list[i-1].number, list[i].number);
-                break;
+        char bool = 0;
+
+        if (list[i].operator == '+') {
+            res = addition(list[i].number, list[i-1].number);
+            bool = 1;
+        }
+        if (list[i].operator == '-') {
+            res = soustraction(list[i].number, list[i-1].number);
+            bool = 1;
         }
 
-        if (res != -1) {
+        if (bool) {
             reorder_list(list, res, &i, &nb_c);
         }
     }
