@@ -135,12 +135,12 @@ void calculate(int nb_c, NUMBER list[]) {
         float res = -1;
         char bool = 0;
 
-        if (list[i].operator == 'x') {
+        if (list[i].operator == 'x' || list[i].operator == '*') {
             res = multiplication(list[i].number, list[i-1].number);
             bool = 1;
         }
         if (list[i].operator == '/') {
-            res = division(list[i].number, list[i-1].number);
+            res = division(list[i-1].number, list[i].number);
             bool = 1;
         }
 
@@ -161,7 +161,7 @@ void calculate(int nb_c, NUMBER list[]) {
             bool = 1;
         }
         if (list[i].operator == '-') {
-            res = soustraction(list[i].number, list[i-1].number);
+            res = soustraction(list[i-1].number, list[i].number);
             bool = 1;
         }
 
