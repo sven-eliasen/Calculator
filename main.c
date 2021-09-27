@@ -65,6 +65,7 @@ int verifArg(int argc, char **argv)
     return argc/2;
 }
 
+
 int parseArgs (int argc, char **argv, NUMBER list[])
 {
     int nb_c = 0;
