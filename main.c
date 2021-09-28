@@ -56,7 +56,39 @@ int verifArg(int argc, char **argv)
         }
 
         // Do switch here
-        if ((strcmp(argv[i],"+") != 0 || strcmp(argv[i],"-") != 0 || strcmp(argv[i],"x") != 0 ||strcmp(argv[i],"m") != 0 || strcmp(argv[i],"*") != 0 || strcmp(argv[i],"/") != 0 || strcmp(argv[i],"%") != 0 || strcmp(argv[i],"v") != 0 || strcmp(argv[i],"V") != 0 || strcmp(argv[i],"^") != 0) && isdigit(atof(argv[i + 1])) != 0)
+        char op = argv[i][0];
+        switch(op)
+        {
+            case '+':
+                break;
+            case '-':
+                continue;
+            case 'm':
+                continue;
+            case 'x':
+                continue;
+            case '*':
+                continue;
+            case '/':
+                continue;
+            case '%':
+                continue;
+            case 'v':
+                continue;
+            case 'V':
+                continue;
+            case '^':
+                continue;
+            default:
+                printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                exit(1);
+        }
+        if (isdigit(argv[i+1][0]) == 0)
+        {
+            printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+            exit(1);
+        }
+        if (i == 2 && isdigit(argv[i-1][0]) == 0)
         {
             printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
             exit(1);
