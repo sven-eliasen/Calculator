@@ -23,27 +23,6 @@ void reorder_list(NUMBER list[], float res, int *i, int *nb_c) {
     (*nb_c)--;
 }
 
-void division2 (const float op1, const float op2)
-{
-    int opp1 = (int)op1;
-    int opp2 = (int)op2;
-    int c = 0;
-
-    if (opp2 > opp1) 
-    {
-        printf("Quotien : 0, Reste : %d\n",  opp2);
-        exit(0);
-    }
-
-    while (opp1 >= opp2)
-    {
-        opp1 = opp1 - opp2;
-        c++;
-    }
-
-    printf("Quotien : %d, Reste : %d\n", c, opp1);
-}
-
 int verifArg(int argc, char **argv)
 {
     // TODO: gestion avec switch + modulo que à la fin
@@ -54,10 +33,9 @@ int verifArg(int argc, char **argv)
             printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
             exit(1);
         }
-
+        
         // Do switch here
-        char op = argv[i][0];
-        switch(op)
+        switch(argv[i][0])
         {
             case '+':
                 break;
@@ -72,11 +50,16 @@ int verifArg(int argc, char **argv)
             case '/':
                 continue;
             case '%':
+                if (i != argc - 2)
+                {
+                    printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                    exit(1); 
+                }
                 continue;
-            case 'v':
-                continue;
-            case 'V':
-                continue;
+            //case 'v':
+            //    continue;
+            //case 'V':
+            //    continue;
             case '^':
                 continue;
             default:
@@ -139,6 +122,27 @@ float multiplication (const float op1, const float op2)
 float division (const float op1, const float op2)
 {
 	return op1 / op2;
+}
+
+void division2 (const float op1, const float op2)
+{
+    int opp1 = (int)op1;
+    int opp2 = (int)op2;
+    int c = 0;
+
+    if (opp2 > opp1) 
+    {
+        printf("Quotien : 0, Reste : %d\n",  opp2);
+        exit(0);
+    }
+
+    while (opp1 >= opp2)
+    {
+        opp1 = opp1 - opp2;
+        c++;
+    }
+
+    printf("Quotien : %d, Reste : %d\n", c, opp1);
 }
 
 float power(const float op1, const float op2)
@@ -214,9 +218,7 @@ void calculate(int nb_c, NUMBER list[]) {
 
 int main(int argc, char **argv) 
 {
-    int lengthTab = verifArg(argc, argv);
-    NUMBER list[lengthTab];
-    int nb_c = parseArgs(argc, argv, list);
-    calculate(nb_c, list);
+    NUMBER list[verifArg(argc, argv)];
+    calculate(parseArgs(argc, argv, list), list);
     return 0;
 }
