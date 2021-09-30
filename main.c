@@ -25,20 +25,40 @@ void reorder_list(NUMBER list[], float res, int *i, int *nb_c) {
 
 int verifArg(int argc, char **argv)
 {
-    // TODO: gestion avec switch + modulo que à la fin
     for (int i = 2; i < argc; i += 2)
     {
-        if (argc % 2 != 0)
+        if (strlen(argv[i]) != 1)
         {
             printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
             exit(1);
         }
-        
-        // Do switch here
+        if (i == 2)
+        {
+            if (!strcmp(argv[i-1],"0"))
+            {
+                continue;
+            }else {
+                if (atof(argv[i-1]) ==  0)
+                {
+                    printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                    exit(1);
+                }
+            }
+        }
+        if (!strcmp(argv[i+1],"0"))
+        {
+            continue;
+        }else {
+            if (atof(argv[i+1]) ==  0)
+            {
+                printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                exit(1);
+            }
+        }
         switch(argv[i][0])
         {
             case '+':
-                break;
+                continue;
             case '-':
                 continue;
             case 'm':
@@ -65,17 +85,12 @@ int verifArg(int argc, char **argv)
             default:
                 printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
                 exit(1);
-        }
-        if (isdigit(argv[i+1][0]) == 0)
-        {
-            printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
-            exit(1);
-        }
-        if (i == 2 && isdigit(argv[i-1][0]) == 0)
-        {
-            printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
-            exit(1);
-        }
+        }    
+    }
+    if (argc == 2 || argc % 2 != 0)
+    {
+        printf("Error usage : the the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+        exit(1); 
     }
     return argc/2;
 }
