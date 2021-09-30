@@ -34,7 +34,7 @@ int verifArg(int argc, char **argv)
         }
         if (i == 2)
         {
-            if (strcmp(argv[i-1],"0\0"))
+            if (strcmp(argv[i-1],"0\0") != 0)
             {
                 if (atof(argv[i-1]) ==  0)
                 {
