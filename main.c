@@ -60,15 +60,10 @@ int verifArg(int argc, char **argv)
         switch(argv[i][0])
         {
             case '+':
-                continue;
             case '-':
-                continue;
             case 'm':
-                continue;
             case 'x':
-                continue;
             case '*':
-                continue;
             case '/':
                 continue;
             case '%':
