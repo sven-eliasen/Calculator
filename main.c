@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
-#include <math.h>
+#include "calc_func.h"
 
 typedef struct Number {
     char operator;
@@ -40,7 +39,7 @@ int verifArg(int argc, char **argv)
         }
         if (i == 2)
         {
-            if (strcmp(argv[i-1],"0\0") != 0)
+            if (strcmp(argv[i-1],"0") != 0)
             {
                 if (atof(argv[i-1]) ==  0)
                 {
@@ -49,7 +48,7 @@ int verifArg(int argc, char **argv)
                 }
             }
         }
-        if (strcmp(argv[i+1],"0\0"))
+        if (strcmp(argv[i+1],"0") != 0)
         {
             if (atof(argv[i+1]) ==  0)
             {
@@ -89,7 +88,7 @@ int verifArg(int argc, char **argv)
 }
 
 
-int parseArgs (int argc, char **argv, NUMBER list[])
+void parseArgs (int argc, char **argv, NUMBER list[])
 {
     int nb_c = 0;
 
@@ -109,53 +108,6 @@ int parseArgs (int argc, char **argv, NUMBER list[])
 			nb_c ++;
 		}
     }
-    return nb_c;
-}
-
-float addition (const float op1, const float op2)
-{
-	return op1 + op2;
-}
-
-float soustraction (const float op1, const float op2)
-{
-	return op1 - op2;
-}
-
-float multiplication (const float op1, const float op2)
-{
-	return op1 * op2;
-}
-
-float division (const float op1, const float op2)
-{
-	return op1 / op2;
-}
-
-void division2 (const float op1, const float op2)
-{
-    int opp1 = (int)op1;
-    int opp2 = (int)op2;
-    int c = 0;
-
-    if (opp2 > opp1) 
-    {
-        printf("Quotien : 0, Reste : %d\n",  opp2);
-        exit(0);
-    }
-
-    while (opp1 >= opp2)
-    {
-        opp1 = opp1 - opp2;
-        c++;
-    }
-
-    printf("Quotien : %d, Reste : %d\n", c, opp1);
-}
-
-float power(const float op1, const float op2)
-{
-    return pow(op2, op1);
 }
 
 void calculate(int nb_c, NUMBER list[]) {
@@ -226,7 +178,10 @@ void calculate(int nb_c, NUMBER list[]) {
 
 int main(int argc, char **argv) 
 {
-    NUMBER list[verifArg(argc, argv)];
-    calculate(parseArgs(argc, argv, list), list);
+    int size = verifArg(argc, argv);
+    NUMBER list[size];
+
+    parseArgs(argc, argv, list);
+    calculate(size, list);
     return 0;
 }
