@@ -37,7 +37,7 @@ int verifArg(int argc, char **argv) {
             if (strcmp(argv[i - 1], "0") != 0) {
 
                 // Check number argument contain only numbers
-                for (unsigned long j = 0; j < strlen(argv[i-1]); ++j) {
+                for (unsigned long j = 0; j < strlen(argv[i - 1]); ++j) {
 
                     if (argv[i - 1][j] < 48 || argv[i - 1][j] > 57) {
                         printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
@@ -49,7 +49,7 @@ int verifArg(int argc, char **argv) {
         if (strcmp(argv[i + 1], "0") != 0) {
 
             // Check number argument contain only numbers
-            for (unsigned long j = 0; j < strlen(argv[i+1]); ++j) {
+            for (unsigned long j = 0; j < strlen(argv[i + 1]); ++j) {
 
                 if (argv[i + 1][j] < 48 || argv[i + 1][j] > 57) {
                     printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
