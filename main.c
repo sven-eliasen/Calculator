@@ -35,16 +35,26 @@ int verifArg(int argc, char **argv) {
         }
         if (i == 2) {
             if (strcmp(argv[i - 1], "0") != 0) {
-                if (atof(argv[i - 1]) == 0) {
-                    printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
-                    exit(1);
+
+                // Check number argument contain only numbers
+                for (unsigned long j = 0; j < strlen(argv[i-1]); ++j) {
+
+                    if (argv[i - 1][j] < 48 || argv[i - 1][j] > 57) {
+                        printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
+                        exit(1);
+                    }
                 }
             }
         }
         if (strcmp(argv[i + 1], "0") != 0) {
-            if (atof(argv[i + 1]) == 0) {
-                printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
-                exit(1);
+
+            // Check number argument contain only numbers
+            for (unsigned long j = 0; j < strlen(argv[i+1]); ++j) {
+
+                if (argv[i + 1][j] < 48 || argv[i + 1][j] > 57) {
+                    printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
+                    exit(1);
+                }
             }
         }
         switch (argv[i][0]) {
