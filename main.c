@@ -23,6 +23,12 @@ void reorder_list(NUMBER list[], float res, int *i, int *nb_c) {
 }
 
 int verifArg(int argc, char **argv) {
+
+    if (argc == 1) {
+        printf("----CALCULATOR----\n\ncalculation possible :\n+\n-\n*\nm\nx\n/\n%%\n\nTo use type this command :\n./calculator [number] [operator] [number]\nor\n./calculator [number] [operator] [number] [operator] [number]\n");
+        exit(1);
+    }
+
     if (argc == 2 || argc % 2 != 0) {
         printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
         exit(1);
