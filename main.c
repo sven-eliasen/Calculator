@@ -25,11 +25,17 @@ void reorder_list(NUMBER list[], float res, int *i, int *nb_c) {
 
 int verifArg(int argc, char **argv)
 {
+    if (argc == 2 || argc % 2 != 0)
+    {
+        printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
+        exit(1);
+    }
+
     for (int i = 2; i < argc; i += 2)
     {
         if (strlen(argv[i]) != 1)
         {
-            printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+            printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
             exit(1);
         }
         if (i == 2)
@@ -38,7 +44,7 @@ int verifArg(int argc, char **argv)
             {
                 if (atof(argv[i-1]) ==  0)
                 {
-                    printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                    printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
                     exit(1);
                 }
             }
@@ -47,7 +53,7 @@ int verifArg(int argc, char **argv)
         {
             if (atof(argv[i+1]) ==  0)
             {
-                printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
                 exit(1);
             }
         }
@@ -68,7 +74,7 @@ int verifArg(int argc, char **argv)
             case '%':
                 if (i != argc - 2)
                 {
-                    printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                    printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
                     exit(1); 
                 }
                 continue;
@@ -79,15 +85,11 @@ int verifArg(int argc, char **argv)
             case '^':
                 continue;
             default:
-                printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
+                printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# -4 x 3 / 6\n");
                 exit(1);
         }    
     }
-    if (argc == 2 || argc % 2 != 0)
-    {
-        printf("Error usage : the format of the calculation is not up to standard\nExample of usage : \n# 2 + 2 / 3\n# - 4 x 3 / 6\n");
-        exit(1); 
-    }
+
     return argc/2;
 }
 
